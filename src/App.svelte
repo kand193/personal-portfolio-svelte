@@ -1,9 +1,13 @@
 <script>
-  const word = "WORLD";
-  const person = {
-    firstName: "YJ",
-    lastName: "P"
-  };
+  import { Router, Link, Route } from "svelte-routing";
+
+  import Main from "./Main.svelte";
+
+  export let url = "";
 </script>
 
-<h1>Hello {word} {person.firstName} {person.lastName}</h1>
+<Router {url}>
+  <Route path="/">
+    <Main />
+  </Route>
+</Router>
