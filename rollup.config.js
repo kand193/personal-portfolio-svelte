@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
+import alias from "rollup-plugin-alias";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -44,6 +45,14 @@ export default {
     // If we're building for production (npm run build
     // instead of npm run dev), minify
     production && terser(),
+
+    alias({
+      resolve: [".svelte"],
+      entries: {
+        routes: "src/routes",
+        components: "src/components",
+      },
+    }),
   ],
   watch: {
     clearScreen: false,
