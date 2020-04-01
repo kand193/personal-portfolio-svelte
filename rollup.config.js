@@ -4,6 +4,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import alias from "rollup-plugin-alias";
+import svg from "rollup-plugin-svg-import";
+import json from "rollup-plugin-json";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -51,8 +53,11 @@ export default {
       entries: {
         routes: "src/routes",
         components: "src/components",
+        contents: "src/contents",
       },
     }),
+    svg({ stringify: true }),
+    json(),
   ],
   watch: {
     clearScreen: false,
