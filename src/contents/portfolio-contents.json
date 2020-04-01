@@ -4,13 +4,25 @@
     "period": "JUNE 2018 - JULY 2018",
     "description": "Main programmer role of development,\nmaintenance, repair",
     "backgroundImage": "/images/background-vroong-marketing.png",
-    "backgroundColor": "#123456"
+    "backgroundColor": "rgb(251,245,153)",
+    "subColor": "#e9c26a",
+    "logos": [
+      "/images/logo-react.png",
+      "/images/logo-nextjs.png",
+      "/images/logo-typescript.png"
+    ]
   },
   {
     "title": "VROONG STORE MARKETING PAGE",
     "period": "JUNE 2018 - JULY 2018",
     "description": "Main programmer role of development,\nmaintenance, repair",
     "backgroundImage": "/images/background-vroong-marketing.png",
-    "backgroundColor": "#123456"
+    "backgroundColor": "#123456",
+    "subColor": "#e9c26a",
+    "logos": [
+      "/images/logo-react.png",
+      "/images/logo-nextjs.png",
+      "/images/logo-typescript.png"
+    ]
   }
 ]

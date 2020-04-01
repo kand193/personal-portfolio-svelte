@@ -18,6 +18,6 @@
 
 <div id="slide-wrapper" style="--width:{width}; --height:{height}">
   {#each contents as content, i}
-    <SlideContent {...content} />
+    <SlideContent {content} index={i + 1} />
   {/each}
 </div>

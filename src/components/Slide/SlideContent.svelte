@@ -1,17 +1,20 @@
 <script>
   import SlideDefs from "./style/SlideDefs.svg";
 
-  export let title = "UNTITLED";
-  export let period = "";
-  export let description = "";
-  export let logos = [];
-  export let backgroundImage = "";
-  export let backgroundColor = "";
+  export let content = {
+    title: "UNTITLED",
+    period: "",
+    description: "",
+    logos: [],
+    backgroundImage: "",
+    backgroundColor: "",
+    subColor: ""
+  };
+  export let index = 0;
 
-  let titleFirst = title;
+  let titleFirst = content.title;
   let titleSecond = "";
-
-  const splittedTitle = title.split(" ");
+  const splittedTitle = content.title.split(" ");
   if (splittedTitle.length > 2) {
     titleFirst = splittedTitle.slice(0, 2).join(" ");
     titleSecond = splittedTitle.slice(2).join(" ");
@@ -23,8 +26,8 @@
 
   const onMouseEnter = e => {
     isHovered = true;
-    hoverX = e.clientX;
-    hoverY = e.clientY;
+    hoverX = e.offsetX;
+    hoverY = e.offsetY;
   };
 
   const onMouseLeave = e => {
@@ -37,7 +40,6 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: var(--background-color);
   }
 
   #content-svg {
@@ -52,16 +54,29 @@
   }
 
   #shadowed-text {
-    font: 900 93px "Roboto";
-    fill: #e9c26a;
+    font-size: 93px;
+    font-weight: 900;
 
     animation: squiggly-text 0.34s linear infinite;
   }
 
   #title-text {
-    font: 900 93px "Roboto";
+    font-size: 93px;
+    font-weight: 900;
     fill: url(#imaging-text);
     z-index: 1000;
+  }
+
+  #period-text {
+    font-size: 35px;
+    font-weight: 600;
+    letter-spacing: -2px;
+  }
+
+  #description-text,
+  #logo-text {
+    font-size: 20px;
+    fill: gray;
   }
 
   #hover-circle {
@@ -81,29 +96,58 @@
   }
 </style>
 
-<div id="slide-content-wrapper" style="--background-color:{backgroundColor}">
+<div
+  id="slide-content-wrapper"
+  style="background-color:{content.backgroundColor}">
   <svg id="content-svg">
     {@html SlideDefs}
     <defs>
       <pattern
         id="imaging-text"
         patternUnits="userSpaceOnUse"
-        width="1330"
-        height="530">
-        <image xlink:href={backgroundImage} width="1330" height="530" />
+        width="1330px"
+        height="530px">
+        <image xlink:href={content.backgroundImage} width="1330" height="530" />
       </pattern>
     </defs>
-    <text id="shadowed-text">
-      <tspan x="12px" y="270px">{titleFirst}</tspan>
-      <tspan x="12px" y="375px">{titleSecond}</tspan>
+    <text id="shadowed-text" style="fill:{content.subColor}">
+      <tspan x="12px" y="240px">{titleFirst}</tspan>
+      <tspan x="12px" y="345px">{titleSecond}</tspan>
     </text>
     <text
       id="title-text"
       on:mouseenter={onMouseEnter}
       on:mouseleave={onMouseLeave}>
-      <tspan x="0px" y="250px">{titleFirst}</tspan>
-      <tspan x="0px" y="355px">{titleSecond}</tspan>
+      <tspan x="0px" y="220px">{titleFirst}</tspan>
+      <tspan x="0px" y="325px">{titleSecond}</tspan>
     </text>
+
+    <text id="period-text" x="0px" y="100px" style="fill:{content.subColor}">
+      #{('000' + index).substr(index.toString().length)} / {content.period}
+    </text>
+    <text id="description-text" width="20px">
+      {#each content.description.split('\n') as desc, i}
+        <tspan x="0" y={400 + i * 25}>{desc}</tspan>
+      {/each}
+    </text>
+
+    <text id="logo-text" x="600px" y="400px">Developed using</text>
+    <line
+      x1="780px"
+      y1="385px"
+      x2="780px"
+      y2="455px"
+      style="stroke:gray;stroke-width:2" />
+
+    {#each content.logos as logo, i}
+      <image
+        href={logo}
+        width="70px"
+        height="70px"
+        x="{800 + i * 110}px"
+        y="385px" />
+    {/each}
+
     <circle
       id="hover-circle"
       class:active={isHovered}
