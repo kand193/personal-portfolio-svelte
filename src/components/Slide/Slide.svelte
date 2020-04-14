@@ -1,11 +1,13 @@
 <script>
   import SlideContent from "./SlideContent.svelte";
 
-  const currentIndex = 0;
-
   export let width = "100%";
   export let height = "100%";
   export let contents = [];
+
+  const currentIndex = 0;
+
+  const onMouseWheel = e => {};
 </script>
 
 <style>
@@ -16,7 +18,10 @@
   }
 </style>
 
-<div id="slide-wrapper" style="--width:{width}; --height:{height}">
+<div
+  id="slide-wrapper"
+  on:mousewheel={onMouseWheel}
+  style="--width:{width}; --height:{height}">
   {#each contents as content, i}
     <SlideContent {content} index={i + 1} />
   {/each}
