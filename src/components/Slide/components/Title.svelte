@@ -25,7 +25,11 @@
 
     ctx.font = "900 93px Roboto";
     ctx.fillStyle = pattern;
-    ctx.fillText(text, 0, baseHeight + options.canvasHeight / 2);
+
+    const textTop = options.canvasHeight / 2 - (texts.length - 1) * 45;
+    texts.forEach((t, ti) => {
+      ctx.fillText(t, 0, baseHeight + textTop + ti * 90);
+    });
   };
 
   onMount(() => {
