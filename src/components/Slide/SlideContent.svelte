@@ -1,5 +1,5 @@
 <script>
-  import SlideDefs from "./style/SlideDefs.svg";
+  import Title from "./components/Title.svelte";
 
   export let content = {
     title: "UNTITLED",
@@ -13,12 +13,4 @@
   export let index = 0;
 </script>
 
-<style>
-
-</style>
-
-<div
-  id="slide-content-wrapper"
-  style="background-color:{content.backgroundColor}">
-  <canvas id="slide{index}" class="slide-canvas" />
-</div>
+<Title text={content.title} />
