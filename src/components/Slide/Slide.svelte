@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   import { renderer } from "./stores/ElementRenderer.js";
-  import { constructor } from "./stores/ElementConstructor.js";
+  import { constructors } from "./stores/ElementConstructor.js";
   import SlideContent from "./SlideContent.svelte";
 
   let canvas;
@@ -22,7 +22,7 @@
     let now = 0;
     let elapsed = 0;
 
-    $constructor.forEach(c => c(ctx));
+    $constructors.forEach(c => c(ctx));
 
     (function loop() {
       frame = requestAnimationFrame(loop);

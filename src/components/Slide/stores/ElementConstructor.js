@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-function createConstructor() {
+function createConstructors() {
   const { subscribe, set, update } = writable([]);
 
   return {
@@ -11,4 +11,4 @@ function createConstructor() {
   };
 }
 
-export const constructor = createConstructor();
+export const constructors = createConstructors();

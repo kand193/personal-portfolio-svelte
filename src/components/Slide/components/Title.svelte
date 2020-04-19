@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   import { renderer } from "../stores/ElementRenderer.js";
-  import { constructor } from "../stores/ElementConstructor.js";
+  import { constructors } from "../stores/ElementConstructor.js";
 
   export let text = "";
   export let imageSrc = "";
@@ -12,7 +12,7 @@
   let pattern;
   let img;
 
-  const con = ctx => {
+  const constructor = ctx => {
     img = new Image();
     img.onload = function() {
       pattern = ctx.createPattern(img, "repeat");
@@ -30,7 +30,7 @@
 
   onMount(() => {
     renderer.push(render);
-    constructor.push(con);
+    constructors.push(constructor);
   });
 </script>
 
