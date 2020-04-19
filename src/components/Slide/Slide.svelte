@@ -29,7 +29,25 @@
       if (elapsed > fpsInterval) {
         then = now - (elapsed % fpsInterval);
         // Put your drawing code here
-        $renderer.forEach(r => r(ctx, offsetY));
+
+        ctx.canvas.width = window.innerWidth;
+        ctx.canvas.height = window.innerHeight;
+
+        const canvasWidth = canvas.getBoundingClientRect().width;
+        const canvasHeight = canvas.getBoundingClientRect().height;
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.save();
+
+        const options = {
+          canvasWidth,
+          canvasHeight,
+          offsetY
+        };
+
+        $renderer.forEach(render => {
+          render(ctx, options);
+          ctx.restore();
+        });
       }
     })();
 
@@ -39,8 +57,8 @@
   });
 </script>
 
-<canvas class="slide-canvas" width="1330" height="530" bind:this={canvas}>
+<canvas class="slide-canvas" bind:this={canvas}>
   {#each contents as content, i}
-    <SlideContent {content} index={i + 1} />
+    <SlideContent {content} index={i} />
   {/each}
 </canvas>

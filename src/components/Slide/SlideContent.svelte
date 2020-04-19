@@ -1,4 +1,5 @@
 <script>
+  import Background from "./components/Background.svelte";
   import Title from "./components/Title.svelte";
 
   export let content = {
@@ -13,4 +14,5 @@
   export let index = 0;
 </script>
 
-<Title text={content.title} />
+<Background color={content.backgroundColor} {index} />
+<Title text={content.title} {index} />
