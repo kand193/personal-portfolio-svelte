@@ -1,7 +1,8 @@
 <script>
   import { onMount } from "svelte";
 
-  import { renderer } from "./SlideRenderer.js";
+  import { renderer } from "./stores/ElementRenderer.js";
+  import { constructor } from "./stores/ElementConstructor.js";
   import SlideContent from "./SlideContent.svelte";
 
   let canvas;
@@ -21,6 +22,8 @@
     let now = 0;
     let elapsed = 0;
 
+    $constructor.forEach(c => c(ctx));
+
     (function loop() {
       frame = requestAnimationFrame(loop);
       now = Date.now();
@@ -33,14 +36,12 @@
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
 
-        const canvasWidth = canvas.getBoundingClientRect().width;
-        const canvasHeight = canvas.getBoundingClientRect().height;
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
 
         const options = {
-          canvasWidth,
-          canvasHeight,
+          canvasWidth: canvas.width,
+          canvasHeight: canvas.height,
           offsetY
         };
 

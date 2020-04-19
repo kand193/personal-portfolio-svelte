@@ -15,4 +15,4 @@
 </script>
 
 <Background color={content.backgroundColor} {index} />
-<Title text={content.title} {index} />
+<Title text={content.title} imageSrc={content.backgroundImage} {index} />

@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
 
-  import { renderer } from "../SlideRenderer.js";
+  import { renderer } from "../stores/ElementRenderer.js";
 
   export let color = "white";
   export let index = 0;
